@@ -1,0 +1,20 @@
+#!/bin/bash
+
+ENTRY_FILE=$(TZ=":America/Los_Angeles" date -I).md
+
+function entry_file () {
+ echo $(TZ=':America/Los_Angeles' date -I).md
+}
+
+function list_entries () {
+ #local past=$(date -I --date="14 days ago")
+ find *.md -regextype sed \
+  -regex '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}.md' | \
+  sort -n
+}
+
+case $1 in
+ -e) vim "$ENTRY_FILE" ;;
+ -l) list_entries "$2" ;;
+ *) echo "$@" >> "$ENTRY_FILE" ;;
+esac
