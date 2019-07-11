@@ -15,5 +15,5 @@ function list_entries () {
 case $1 in
  -e) vim "$ENTRY_FILE" ;;
  -l) list_entries "$2" ;;
- *) echo "$@" >> "$ENTRY_FILE" ;;
+ *) [ -n "@" ] && echo "$@" >> "$ENTRY_FILE" ;;
 esac
